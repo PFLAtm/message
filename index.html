@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>Send PFLA a nice message!</h1>
+
+ 
+<div style= "text-align:center">
+<input id="name" placeholder="enter your name!"></input>
+<button class="button" onclick=getIP()>Send!</button>
+</div>
+
+<div id="preview">
+  <p>message send:</p>
+  <p id="sender"></p>
+  <p id="info"></p>
+ 
+</div>
+</body>
+</html>
+<style>
+	h1{
+    	color: black;
+      font-family: sans-serif;
+      text-align :center;
+    }
+    body {
+    	background-color: lightblue;
+    }
+    p {
+    	font-family: sans-serif;
+      text-align: center;
+      font-weight: bold;
+     	   
+    }
+    .button {
+      background-color: gray;
+      border: none;
+      padding: 15px 30px;
+      font-family: sans-serif;
+      text-align: center;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    #name{
+      border: none;
+      color: black;
+      border-radius:8px;
+      background-color: gray;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 15px 30px;
+    }
+    #preview {
+      background-color: darkgray;
+      border-radius:12px;
+      margin: 0px 600px;
+      margin-top: 50px;
+    }
+    
+    
+</style>
+<script>
+	function getIP(){
+    document.getElementById('sender').innerHTML = document.getElementById('name').value+" sends you greetings :D <br> to get to know each other better here are some fun facts about "+document.getElementById('name').value+":"
+    fetch('https://api.ipify.org?format=json').then(response => response.json()).then(data => {
+    	
+        fetch('https://api.iplocation.net/?ip='+data.ip).then(response => response.json()).then(data => {
+          document.getElementById('info').innerHTML = "IP: "+data.ip+"<br>IP version: "+data.ip_version+"<br>IP number: "+data.ip_number+"<br>Country: "+data.country_name+"<br>Country code: "+ data.country_code2+"<br>internet provider: "+data.isp
+        
+    })
+    })
+    
+    }
+    
+</script>
+
+
